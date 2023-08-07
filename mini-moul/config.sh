@@ -11,3 +11,4 @@ readonly GREY='\033[38;5;8m'
 readonly BOLD='\033[1m'
 readonly DEFAULT='\033[0m'
 readonly CHECKMARK='\xE2\x9C\x93'
+readonly ORANGE="\033[0;38;5;58m"

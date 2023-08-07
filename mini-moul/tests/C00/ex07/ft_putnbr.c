@@ -53,34 +53,41 @@ int run_tests(t_test *tests, int count)
 
                 // Redirect the output to a file
                 int saved_stdout = dup(STDOUT_FILENO);
-                int output_fd = open("output.txt", O_WRONLY | O_CREAT | O_TRUNC, S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
-                dup2(output_fd, STDOUT_FILENO);
-                close(output_fd);
+                int pipefd[2];
+                pipe(pipefd);
+                dup2(pipefd[1],STDOUT_FILENO);
+                close(pipefd[1]);
 
                 // Call the function to be tested
                 ft_putnbr(tests[i].n);
+
+                size_t bytes_read = read(pipefd[0], buffer, sizeof(buffer));
+                close(pipefd[0]);
+
+                //ghadi t7sb b nullterminator ila kan
+                size_t actual_length = bytes_read;
 
                 // Restore the original output
                 fflush(stdout);
                 dup2(saved_stdout, STDOUT_FILENO);
                 close(saved_stdout);
 
-                // Open the output file and check its contents
-                FILE *fp = fopen("output.txt", "r");
-                fgets(buffer, sizeof(buffer), fp);
-                fclose(fp);
 
                 // Check that the output matches the expected value
-                if (strcmp(buffer, tests[i].expected) != 0)
+                // Compare the actual output length with the expected output length
+                //moulinette katrj3 write(1, "2147483648", 11); 7itach katprinter \0 khassha tkun write(1, "2147483648", 10);
+                if (actual_length != strlen(tests[i].expected)) 
+                {
+                        printf("    " ORANGE "[%d] %s Expected %zu characters, got %zu characters\n", i + 1, tests[i].desc, strlen(tests[i].expected) - 1, actual_length - 1);
+                        error -= 1;
+                }
+                else if (strcmp(buffer, tests[i].expected) != 0)
                 {
                         printf("    " RED "[%d] %s Expected \"%s\", got \"%s\"\n", i + 1, tests[i].desc, tests[i].expected, buffer);
                         error -= 1;
                 }
                 else
                         printf("  " GREEN CHECKMARK GREY " [%d] %s output \"%s\" as expected\n" DEFAULT, i + 1, tests[i].desc, buffer);
-
-                // Delete the output file
-                remove("output.txt");
         }
 
         return (error);
