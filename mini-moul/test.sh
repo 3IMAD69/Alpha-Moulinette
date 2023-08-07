@@ -29,10 +29,10 @@ main()
         dirname="$(basename "$dir")"
         available_assignments+="$dirname "
         
-        if [ -d "$dir" ] && [ "$dirname" == "$1" ]; then
+        if [ -d "$dir" ] && [ "$dirname" == "${1^^}" ]; then
             dirname_found=1
             print_header
-            printf "${GREEN} Generating test for ${1}...\n${DEFAULT}"
+            printf "${GREEN} Generating test for ${1^^}...\n${DEFAULT}"
             space
             dirname_found=1
             index=0
@@ -184,7 +184,7 @@ if [ "${1}" = "" ]; then
     printf "Please select an assignment. e.g. './test.sh C01'\n"
     exit 1
 fi
-if [ "${1}" = "C00" -o "${1}" = "C01" -o "${1}" = "C02" -o "${1}" = "C03" -o "${1}" = "C04" -o "${1}" = "C05" -o "${1}" = "C06" -o "${1}" = "C07" -o "${1}" = "C08" -o "${1}" = "C09" -o "${1}" = "C10" -o "${1}" = "C11" -o "${1}" = "C12" -o "${1}" = "C13" ]; then
+if [ "${1^^}" = "C00" -o "${1^^}" = "C01" -o "${1^^}" = "C02" -o "${1^^}" = "C03" -o "${1^^}" = "C04" -o "${1^^}" = "C05" -o "${1}" = "C06" -o "${1^^}" = "C07" -o "${1^^}" = "C08" -o "${1^^}" = "C09" -o "${1^^}" = "C10" -o "${1^^}" = "C11" -o "${1^^}" = "C12" -o "${1^^}" = "C13" ]; then
     main "$@"
     printf "$DEFAULT"
     exit
