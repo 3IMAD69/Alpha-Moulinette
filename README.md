@@ -1,6 +1,6 @@
 # Mini-moulinette
 
-![mini-moulinette](mini-moulinette.jpg)
+![mini-moulinette](alpha_mouli.gif)
 
 Mini-moulinette is a test runner for 42 assignments, providing automated tests for whole assignment with one command. The goal is to make thorough checking before submitting the assignments, with ease.
 
