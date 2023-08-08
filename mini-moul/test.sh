@@ -24,6 +24,7 @@ dirname_found=0
 main()
 {
     start_time=$(date +%s)
+
     #print_collected_files
     for dir in ./tests/* ; do
         dirname="$(basename "$dir")"
@@ -99,6 +100,7 @@ main()
     fi
     print_footer
 }
+
 
 print_header()
 {

@@ -10,9 +10,41 @@ function handle_sigint {
   exit 1
 }
 
-if [[ "$#" -eq 1 ]]; then
-	cp -R ~/mini-moulinette/mini-moul mini-moul
-  run_norminette
+function run_norminette()
+{
+    local directory="$1"
+    cd "$directory"
+
+    if command -v norminette &> /dev/null; then
+        norminette 
+    else
+        echo "norminette not found, skipping norminette checks"
+    fi
+}
+
+if [[ "$#" -ge 1 && "$#" -le 2 ]]; then
+  nn_arg="${2^^}"
+
+  if [ "$nn_arg" = "-NN" ]; then
+    # Skip running norminette
+    echo "Skipping norminette checks"
+  else
+    # Run norminette and capture its output
+    norminette_output=$(run_norminette "$PWD")
+    norminette_exit_code=$?   
+  
+  if [ $norminette_exit_code -ne 0 ]; then
+    printf "${RED}Error or warning detected in norminette output:\n${DEFAULT}"
+    printf "$norminette_output\n"
+    printf "${RED}Aborting the script.${DEFAULT}\n"
+    exit 1
+  else 
+    printf "${GREEN}Norminette Status : OK!"
+  fi
+fi
+
+  cp -R ~/mini-moulinette/mini-moul mini-moul
+
   trap handle_sigint SIGINT
 	cd mini-moul
   ./test.sh "$1"
@@ -24,11 +56,3 @@ fi
 
 exit 1
 
-run_norminette()
-{
-    if command -v norminette &> /dev/null; then
-        norminette
-    else
-        echo "norminette not found, skipping norminette checks"
-    fi
-}
