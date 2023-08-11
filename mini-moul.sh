@@ -39,7 +39,7 @@ if [[ "$#" -ge 1 && "$#" -le 2 ]]; then
     printf "${RED}Aborting the script.${DEFAULT}\n"
     exit 1
   else 
-    printf "${GREEN}Norminette Status : OK!"
+    printf "${GREEN}Norminette Status : OK!\n"
   fi
 fi
 
