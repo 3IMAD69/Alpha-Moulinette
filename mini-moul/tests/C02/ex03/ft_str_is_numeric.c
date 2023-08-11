@@ -26,6 +26,14 @@ int	main(void)
 		{
 			.str = "-_jsdsdc67sdlkc,",
 			.expected = 0
+		},
+		{
+			.str = "42069696969a",
+			.expected = 0
+		},
+		{
+			.str = "",
+			.expected = 1
 		}
 	};
 	int count = sizeof(tests) / sizeof(tests[0]);

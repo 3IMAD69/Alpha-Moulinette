@@ -26,6 +26,14 @@ int	main(void)
 		{
 			.str = "-_134556efSghij67",
 			.expected = 0
+		},
+		{
+			.str = "lookingforyouB",
+			.expected = 0
+		},
+		{
+			.str = "",
+			.expected = 1
 		}
 	};
 	int count = sizeof(tests) / sizeof(tests[0]);

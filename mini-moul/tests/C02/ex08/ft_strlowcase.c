@@ -31,6 +31,16 @@ int	main(void)
 			.src = "23_-3FREWG4WVFSD4",
 			.expected = "23_-3frewg4wvfsd4"
 		},
+        {
+			.desc = "ft_strlowcase(\"\")",
+			.src = "",
+			.expected = ""
+		},
+        {
+			.desc = "ft_strlowcase(\"1337BEN\")",
+			.src = "1337BEN",
+			.expected = "1337ben"
+		},
 	};
 	int count = sizeof(tests) / sizeof(tests[0]);
 	

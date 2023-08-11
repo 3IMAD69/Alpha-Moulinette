@@ -23,14 +23,14 @@ int	test2(void)
 {
 	int result;
 
-	result = ft_str_is_alpha("abcdefghijk2l");
+	result = ft_str_is_alpha("abcdefghijkl2");
 	if (result != 0)
 	{
-		printf("    " RED "[2] ft_str_is_alpha(\"abcdefghijk2l\") Expected 0, got %d\n", result);
+		printf("    " RED "[2] ft_str_is_alpha(\"abcdefghijkl2\") Expected 0, got %d\n", result);
 		return (-1);
 	}
 	else
-		printf("  "GREEN CHECKMARK GREY" [2] ft_str_is_alpha(\"abcdefghijk2l\") Expected 0, got %d\n"DEFAULT, result);
+		printf("  "GREEN CHECKMARK GREY" [2] ft_str_is_alpha(\"abcdefghijkl2\") Expected 0, got %d\n"DEFAULT, result);
 	return (0);
 }
 
@@ -49,9 +49,24 @@ int	test3(void)
 	return (0);
 }
 
+int	test4(void)
+{
+	int result;
+
+	result = ft_str_is_alpha("");
+	if (result == 1)
+		printf("  "GREEN CHECKMARK GREY" [3] ft_str_is_alpha(\"\") Expected 1, got %d\n"DEFAULT, result);
+	else
+	{
+		printf("    " RED "[3] ft_str_is_alpha(\"\") Expected 1, got %d\n", result);
+		return (-1);
+	}
+	return (0);
+}
+
 int	main(void)
 {
-	if (test1()+test2()+test3()!=0)
+	if (test1()+test2()+test3()+test4()!=0)
 		return (-1);
 	return (0);
 }

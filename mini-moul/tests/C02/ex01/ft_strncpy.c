@@ -58,9 +58,46 @@ int	test3(void)
 	return (0);
 }
 
+int	test4(void)
+{
+	    // Test with empty source string
+    char dest_empty[10] = "Hello";
+    char src_empty[] = "";
+    size_t n_empty = sizeof(dest_empty);
+    ft_strncpy(dest_empty, src_empty, n_empty);
+    if (strcmp(dest_empty, "") == 0)
+    {
+        printf("   " GREEN CHECKMARK GREY " [1] Test Passed: Copied empty source string correctly." DEFAULT "\n");
+    }
+    else
+    {
+        printf("    " RED "Test Failed: Empty source string not copied correctly." DEFAULT "\n");
+		return (-1);
+    }
+	return (0);
+}
+
+int test5(void)
+{
+	// Test copying with n = 0 (no characters copied)
+    char dest_n_zero[10] = "Hello";
+    char src_n_zero[] = "Goodbye";
+    ft_strncpy(dest_n_zero, src_n_zero, 0);
+    if (strcmp(dest_n_zero, "Hello") == 0)
+    {
+        printf("   " GREEN CHECKMARK GREY " [5] Test Passed: Copied with n = 0, destination unchanged." DEFAULT "\n");
+    }
+    else
+    {
+        printf("    " RED "Test Failed: Copied with n = 0, destination changed incorrectly." DEFAULT "\n");
+		return (-1);
+    }
+	return (0);
+}
+
 int	main(void)
 {
-	if (test1()+test2()+test3()!=0)
+	if (test1()+test2()+test3()+test4()+test5()!=0)
 		return (-1);
 	return (0);
 }

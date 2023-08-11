@@ -34,6 +34,12 @@ int	main(void)
 			.dest = {0},
 			.src = "TcXF",
 			.expected = "TcXF"
+		},
+		{
+			.desc = "ft_strcpy(dest[10], \"hello\")",
+			.dest = {0},
+			.src = "",
+			.expected = ""
 		}
 	};
 	int count = sizeof(tests) / sizeof(tests[0]);
